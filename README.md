@@ -1,2 +1,59 @@
-# structure_resolved_phylogenetics
-structure resolved phylogenetics
+# Structure Resolved Phylogeny
+
+## Overview
+
+This project explored minimization of confounding structural signal in a phylogenetic model. These models, which take a multiple sequence alignment (MSA) as input, assume mutations occur independently from one another. Protein structure prediction, an adjacent field which also makes use of MSAs, functions by identifying covarying mutations to predict structure. These two fields are in conflict with one another. Status quo phylogenetic methods ignore covariation. Here, a serial-sample neighbor joining phylogenetic model is purified of structural signal - which is indicative of such covariation. Phylogenetic trees from an unweighted serial-sample neighbor joining model are compared against a weighted serial-sample neighbor joining model that makes use of a downweight vector inversely proportional to the total number of contacts per residue. The tree topologies differ. Ancient mitochondrial genomes and the mitochondria-encoded subunits of the complex I heteromeric structure were used as data.
+
+Further solidification of this work, such as accounting for sample time measurement error in the phylogenetic model, including more mitochondrial genome samples, and including the rest of the mitochondrial genome sequence might give rise to an improved definition of the human maternal haplotype.
+
+---
+
+### Data sources:
+- [Ancient mtDNA Database (amtDB)](https://amtdb.org/) — 2,022 ancient human mtDNA sequences
+- [PDB 9I4I](https://www.rcsb.org/structure/9I4I) — human respiratory complex I structure (7 mitochondria subunits + 38 nuclear subunits)
+- [rCRS (NC_012920.1)](https://www.ncbi.nlm.nih.gov/nuccore/NC_012920.1) — revised cambridge reference sequence
+
+### Files:
+- contact_map.ipynb
+  - full contact map of 9I4I + downweight vector for each complex I mito subunit
+- mt_data.ipynb
+  - extraction / subsampling of complex I genes from ancient mtDNA sequences
+  - QC
+- mt_phylo.ipynb
+  - processing of data generated from previous two notebooks
+  - sequence comparison of ancient mito genes versus reference gene at nucleotide and amino acid level
+  - alignment of downweight vector against ancient mito gene sequences
+  - weighted versus unweighted phylo tree generation / visualization
+- data/amtdb_meta/amtdb_meta.ipynb
+  - linked meta data for each ancient mtDNA genome
+- notebook.ipynb
+  - deprecated R&D analysis
+  
+---
+
+### Contact-Based Downweighting
+For each mtDNA-encoded residue, compute total structural contacts:
+- Intra-chain contacts (within same subunit)
+- Inter-mtDNA contacts (between mtDNA-encoded subunits)
+- Mito-nuclear contacts (between mtDNA and nuclear-encoded subunits)
+
+downweight coefficient vector = 1 / (total contacts per residue)
+
+## References
+
+- Saitou & Nei, (1987) "The neighbor-joining method: a new method for reconstructing phylogenetic trees"
+- Drummond AJ, Rodrigo AG (2000) "Reconstructing genealogies of serial samples under the assumption of a molecular clock using serial-sample UPGMA"
+- Ehler et al. (2019) "AmtDB: a database of ancient human mitochondrial genomes"
+- Zhu et al. (2024) "Structure of human respiratory Complex I" [PDB 9I4I]
+
+## License
+
+None. All rights reserved.
+
+---
+
+Note: not peer-reviewed work
+
+---
+
+I am no longer running this project. Inquiries should be directed to [Dr. Sergey Ovchinnikov](so3@mit.edu).
