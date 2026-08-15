@@ -1,4 +1,4 @@
-# Structure Resolved Phylogeny
+# Structure Resolved Phylogenetics
 
 ## Overview
 
